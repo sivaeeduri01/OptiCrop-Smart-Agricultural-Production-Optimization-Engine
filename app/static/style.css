@@ -1,0 +1,1057 @@
+/* =====================================================
+        OptiCrop AI Dashboard
+        Part 1
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    color:#1f2937;
+
+    background:
+    linear-gradient(
+        135deg,
+        #eefbf3 0%,
+        #dff7e8 35%,
+        #cdeed8 70%,
+        #f8fff9 100%
+    );
+
+    position:relative;
+
+}
+
+/* ==========================
+        BACKGROUND
+========================== */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:600px;
+
+    height:600px;
+
+    background:#22c55e;
+
+    opacity:.12;
+
+    filter:blur(170px);
+
+    top:-220px;
+
+    left:-180px;
+
+    z-index:-2;
+
+    animation:moveOne 15s infinite alternate;
+
+}
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:520px;
+
+    height:520px;
+
+    background:#38bdf8;
+
+    opacity:.10;
+
+    filter:blur(160px);
+
+    right:-180px;
+
+    bottom:-180px;
+
+    z-index:-2;
+
+    animation:moveTwo 14s infinite alternate;
+
+}
+
+@keyframes moveOne{
+
+    from{
+
+        transform:translate(0,0);
+
+    }
+
+    to{
+
+        transform:translate(120px,80px);
+
+    }
+
+}
+
+@keyframes moveTwo{
+
+    from{
+
+        transform:translate(0,0);
+
+    }
+
+    to{
+
+        transform:translate(-100px,-70px);
+
+    }
+
+}
+
+/* ==========================
+        CONTAINER
+========================== */
+
+.container{
+
+    width:92%;
+
+    max-width:1450px;
+
+    margin:auto;
+
+    padding:35px 0;
+
+}
+
+/* ==========================
+          HEADER
+========================== */
+
+.header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+    margin-bottom:35px;
+
+}
+
+.logo{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:42px;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #16a34a,
+        #84cc16
+    );
+
+    box-shadow:
+    0 15px 35px rgba(22,163,74,.35);
+
+}
+
+.header h1{
+
+    font-size:42px;
+
+    font-weight:700;
+
+    color:#14532d;
+
+}
+
+.header p{
+
+    color:#475569;
+
+    margin-top:6px;
+
+    font-size:15px;
+
+}
+
+/* ==========================
+        GRID
+========================== */
+
+.main-container{
+
+    display:grid;
+
+    grid-template-columns:420px 1fr;
+
+    gap:35px;
+
+}
+
+/* ==========================
+       INPUT PANEL
+========================== */
+
+.input-panel{
+
+    background:rgba(255,255,255,.90);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:24px;
+
+    padding:30px;
+
+    border:1px solid rgba(34,197,94,.15);
+
+    box-shadow:
+    0 15px 35px rgba(15,23,42,.08);
+
+}
+
+.input-panel h2{
+
+    color:#166534;
+
+    font-size:24px;
+
+    margin-bottom:25px;
+
+}
+
+/* ==========================
+       INPUT GROUP
+========================== */
+
+.input-group{
+
+    margin-bottom:20px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:16px 18px;
+
+    border-radius:14px;
+
+    border:1px solid #d1d5db;
+
+    background:white;
+
+    color:#111827;
+
+    outline:none;
+
+    transition:.35s;
+
+    font-size:15px;
+
+}
+
+.input-group input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+.input-group input:hover{
+
+    border-color:#86efac;
+
+}
+
+.input-group input:focus{
+
+    border:2px solid #16a34a;
+
+    box-shadow:
+
+    0 0 0 5px rgba(22,163,74,.12);
+
+}
+
+/* ==========================
+        BUTTON
+========================== */
+
+.predict-btn{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:16px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:white;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+        135deg,
+        #16a34a,
+        #22c55e
+    );
+
+    transition:.35s;
+
+    box-shadow:
+    0 15px 35px rgba(22,163,74,.28);
+
+}
+
+.predict-btn:hover{
+
+    transform:translateY(-4px);
+
+    background:
+    linear-gradient(
+        135deg,
+        #15803d,
+        #16a34a
+    );
+
+    box-shadow:
+    0 20px 40px rgba(22,163,74,.35);
+
+}
+
+.predict-btn:active{
+
+    transform:scale(.98);
+
+}
+/* ==========================================
+        RIGHT PANEL
+========================================== */
+
+.result-panel{
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:24px;
+
+    border:1px solid rgba(34,197,94,.15);
+
+    padding:35px;
+
+    min-height:760px;
+
+    box-shadow:
+    0 15px 35px rgba(15,23,42,.08);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.35s;
+
+}
+
+.prediction-card{
+
+    width:100%;
+
+    animation:fadeUp .8s ease;
+
+}
+
+.prediction-card h2{
+
+    color:#166534;
+
+    font-size:30px;
+
+    margin-bottom:20px;
+
+}
+
+.crop-name{
+
+    font-size:48px;
+
+    font-weight:700;
+
+    color:#15803d;
+
+    margin-bottom:25px;
+
+}
+
+.confidence{
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:#334155;
+
+    margin-bottom:30px;
+
+}
+
+.confidence span{
+
+    margin-left:10px;
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-weight:700;
+
+}
+
+/* ===========================
+        RESULT GRID
+=========================== */
+
+.result-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:22px;
+
+    margin-top:20px;
+
+}
+
+.info-card{
+
+    background:#ffffff;
+
+    border:1px solid #dcfce7;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 8px 18px rgba(15,23,42,.05);
+
+}
+
+.info-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 18px 35px rgba(15,23,42,.10);
+
+    border-color:#86efac;
+
+}
+
+.info-card i{
+
+    font-size:30px;
+
+    color:#16a34a;
+
+    margin-bottom:14px;
+
+}
+
+.info-card h3{
+
+    color:#14532d;
+
+    font-size:18px;
+
+    margin-bottom:12px;
+
+}
+
+.info-card p{
+
+    color:#475569;
+
+    line-height:1.7;
+
+    font-size:15px;
+
+}
+
+/* ===========================
+        EMPTY STATE
+=========================== */
+
+.empty-state{
+
+    text-align:center;
+
+    max-width:500px;
+
+}
+
+.empty-icon{
+
+    font-size:90px;
+
+    margin-bottom:25px;
+
+    animation:floatIcon 3s ease-in-out infinite;
+
+}
+
+.empty-state h2{
+
+    color:#14532d;
+
+    font-size:34px;
+
+    margin-bottom:15px;
+
+}
+
+.empty-state p{
+
+    color:#64748b;
+
+    line-height:1.8;
+
+    font-size:17px;
+
+}
+
+.empty-state strong{
+
+    color:#16a34a;
+
+}
+
+/* ===========================
+        ANIMATIONS
+=========================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes floatIcon{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================
+        SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#22c55e;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#eefbf3;
+
+}
+
+/* ===========================
+        RESPONSIVE
+=========================== */
+
+@media(max-width:1100px){
+
+.main-container{
+
+grid-template-columns:1fr;
+
+}
+
+.result-panel{
+
+margin-top:25px;
+
+min-height:auto;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.container{
+
+width:95%;
+
+}
+
+.header{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+.header h1{
+
+font-size:32px;
+
+}
+
+.logo{
+
+width:75px;
+
+height:75px;
+
+font-size:34px;
+
+}
+
+.result-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.crop-name{
+
+font-size:38px;
+
+}
+
+.input-panel{
+
+padding:22px;
+
+}
+
+.result-panel{
+
+padding:25px;
+
+}
+
+.predict-btn{
+
+font-size:17px;
+
+padding:16px;
+
+}
+
+}
+/* ==========================================
+        PART 3 - PREMIUM EFFECTS
+========================================== */
+
+/* Page Fade Animation */
+
+.container{
+
+    animation:pageLoad .8s ease;
+
+}
+
+@keyframes pageLoad{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Glass Shine Effect */
+
+.input-panel,
+.result-panel{
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.input-panel::before,
+.result-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:60%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.25),
+
+        transparent
+
+    );
+
+    transition:1.5s;
+
+}
+
+.input-panel:hover::before,
+.result-panel:hover::before{
+
+    left:150%;
+
+}
+
+/* Better Button */
+
+.predict-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.predict-btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:120%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.35),
+
+        transparent
+
+    );
+
+}
+
+.predict-btn:hover::after{
+
+    animation:buttonGlow .9s;
+
+}
+
+@keyframes buttonGlow{
+
+    from{
+
+        left:-120%;
+
+    }
+
+    to{
+
+        left:150%;
+
+    }
+
+}
+
+/* Input Icons Animation */
+
+.input-group:hover label{
+
+    color:#16a34a;
+
+    transition:.3s;
+
+}
+
+/* Better Card Hover */
+
+.info-card{
+
+    position:relative;
+
+}
+
+.info-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:5px;
+
+    height:0;
+
+    background:#16a34a;
+
+    border-radius:20px;
+
+    transition:.35s;
+
+}
+
+.info-card:hover::before{
+
+    height:100%;
+
+}
+
+/* Nice Selection */
+
+::selection{
+
+    background:#22c55e;
+
+    color:white;
+
+}
+
+/* Better Heading */
+
+.header h1{
+
+    background:linear-gradient(
+        90deg,
+        #15803d,
+        #22c55e
+    );
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+
+}
+/* Floating Logo */
+
+.logo{
+
+    animation:logoFloat 4s ease-in-out infinite;
+
+}
+
+@keyframes logoFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-6px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* AI Recommendation Card */
+
+.prediction-card{
+
+    border-radius:20px;
+
+}
+
+/* Nice Empty Icon */
+
+.empty-icon{
+
+    filter:drop-shadow(
+
+        0 12px 20px
+
+        rgba(34,197,94,.25)
+
+    );
+
+}
+
+/* Small Footer */
+
+.footer{
+
+    margin-top:40px;
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+.footer strong{
+
+    color:#16a34a;
+
+}
+/* Error Message */
+
+.error-box{
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:1px solid #fca5a5;
+
+    margin-bottom:20px;
+
+    font-weight:600;
+
+}

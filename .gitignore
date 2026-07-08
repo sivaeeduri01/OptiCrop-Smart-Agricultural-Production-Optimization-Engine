@@ -1,0 +1,41 @@
+:\Users\shiva\OneDrive\Desktop\OptiCrop\venv\Scripts\Activate.ps1)
+(venv) PS C:\Users\shiva\OneDrive\Desktop\OptiCrop> dir
+
+
+    Directory: C:\Users\shiva\OneDrive\Desktop\OptiCrop
+
+
+Mode                 LastWriteTime         Length Name   
+----                 -------------         ------ ----   
+dar--l       07-Jul-26  10:52 AM🌞                app    
+dar--l       04-Jul-26  9:09 PM🌥️                dataset
+dar--l       04-Jul-26  9:39 PM🌥️                model  
+dar--l       04-Jul-26  9:10 PM🌥️                noteboo
+                                                  k      
+dar--l       07-Jul-26  11:09 AM🌞                playwri
+                                                  ght-rep
+                                                  ort    
+dar--l       06-Jul-26  9:18 PM🌥️                Project
+                                                   Docume
+                                                  ntation
+dar--l       07-Jul-26  11:09 AM🌞                test-re
+                                                  sults  
+dar--l       07-Jul-26  11:04 AM🌞                tests  
+dar--l       04-Jul-26  9:19 PM🌥️                venv   
+-a---l       07-Jul-26  10:51 AM🌞            181 .gitign
+                                                  ore    
+-a---l       07-Jul-26  10:51 AM🌞           2969 package
+                                                  -lock.j
+                                                  son    
+-a---l       07-Jul-26  10:51 AM🌞            253 package
+                                                  .json  
+-a---l       07-Jul-26  10:51 AM🌞           2191 playwri
+                                                  ght.con
+                                                  fig.js 
+-a---l        08-Jul-26  9:48 AM🌞             28 Procfil
+                                                  e      
+-a---l       05-Jul-26  10:51 AM🌞              0 READNE.
+                                                  md     
+-a---l        08-Jul-26  9:47 AM🌞            426 require
+                                                  ments.t
+                                                  xt

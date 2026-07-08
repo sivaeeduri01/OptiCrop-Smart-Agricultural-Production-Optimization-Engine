@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiCrop | Smart Agricultural Production Optimization Engine</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="logo">
+            🌱
+        </div>
+
+        <div>
+
+            <h1>
+                <i class="fa-solid fa-leaf"></i>
+                OptiCrop AI
+            </h1>
+
+            <p>
+                Smart Agricultural Production Optimization Engine
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="main-container">
+
+
+        <!-- LEFT PANEL -->
+
+
+        <div class="input-panel">
+
+            <h2>
+
+                <i class="fa-solid fa-seedling"></i>
+
+                Soil & Climate Parameters
+
+            </h2>
+
+            <form action="/predict" method="POST">
+                {% if error %}
+                <div class="error-box">
+                   {{ error }}
+                    </div>
+                {% endif %}
+
+
+                <div class="input-group">
+
+                    <label>
+
+                        Nitrogen (N)
+
+                    </label>
+
+                    <input
+type="number"
+name="N"
+min="0"
+max="140"
+value="{{ N if N is defined else '' }}"
+placeholder="Example: 90"
+required>
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label>
+
+                        Phosphorus (P)
+
+                    </label>
+
+                    <input
+type="number"
+name="P"
+min="0"
+max="145"
+value="{{ P if P is defined else '' }}"
+placeholder="Example: 42"
+required>
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label>
+
+                        Potassium (K)
+
+                    </label>
+
+                    <input
+type="number"
+name="K"
+min="0"
+max="205"
+value="{{ K if K is defined else '' }}"
+placeholder="Example: 43"
+required>
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label>
+
+                        Temperature (°C)
+
+                    </label>
+
+                    <input
+type="number"
+step="any"
+name="temperature"
+min="0"
+max="60"
+value="{{ temperature if temperature is defined else '' }}"
+placeholder="Example: 25.5"
+required>
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label>
+
+                        Humidity (%)
+
+                    </label>
+
+                    <input
+type="number"
+step="any"
+name="humidity"
+min="0"
+max="100"
+value="{{ humidity if humidity is defined else '' }}"
+placeholder="Example: 82"
+required>
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label>
+
+                        Soil pH
+
+                    </label>
+
+                    <input
+type="number"
+step="any"
+name="ph"
+min="0"
+max="14"
+value="{{ ph if ph is defined else '' }}"
+placeholder="0 - 14"
+required>
+
+                </div>
+
+
+
+                <div class="input-group">
+
+                    <label>
+
+                        Rainfall (mm)
+
+                    </label>
+
+                    <input
+type="number"
+step="any"
+name="rainfall"
+min="0"
+max="500"
+value="{{ rainfall if rainfall is defined else '' }}"
+placeholder="Example: 180"
+required>
+
+                </div>
+
+
+
+                <button class="predict-btn">
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                    Analyze & Recommend
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- RIGHT PANEL -->
+
+
+        <div class="result-panel">
+
+            {% if prediction %}
+
+            <div class="prediction-card">
+
+                <h2>
+
+                    AI Recommendation
+
+                </h2>
+
+                <div class="crop-name">
+
+                    🌾 {{ prediction }}
+
+                </div>
+
+                <div class="confidence">
+
+                    Confidence
+
+                    <span>
+
+                        {{ confidence }} %
+
+                    </span>
+
+                </div>
+                    <div class="result-grid">
+
+                    <div class="info-card">
+
+                        <i class="fa-solid fa-droplet"></i>
+
+                        <h3>Water Requirement</h3>
+
+                        <p>{{ info.water }}</p>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <i class="fa-solid fa-mountain"></i>
+
+                        <h3>Suitable Soil</h3>
+
+                        <p>{{ info.soil }}</p>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <i class="fa-solid fa-flask"></i>
+
+                        <h3>Fertilizer</h3>
+
+                        <p>{{ info.fertilizer }}</p>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <i class="fa-solid fa-lightbulb"></i>
+
+                        <h3>Cultivation Tip</h3>
+
+                        <p>{{ info.tip }}</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+
+                    🌱
+
+                </div>
+
+                <h2>
+
+                    AI Analysis Waiting...
+
+                </h2>
+
+                <p>
+
+                    Enter the soil and environmental parameters on the left.
+                    <br><br>
+                    Click <strong>Analyze & Recommend</strong> to receive an AI-powered crop recommendation.
+
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
