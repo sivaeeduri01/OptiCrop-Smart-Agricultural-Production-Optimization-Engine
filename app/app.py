@@ -103,6 +103,7 @@ crop_info = {
         "fertilizer": "Balanced NPK",
         "tip": "Avoid excess watering."
     },
+    
     "apple": {
         "water": "Moderate",
         "soil": "Well-drained Loam",
